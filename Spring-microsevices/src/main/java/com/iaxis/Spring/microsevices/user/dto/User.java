@@ -1,5 +1,8 @@
 package com.iaxis.Spring.microsevices.user.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.PastOrPresent;
+
 import java.time.LocalDate;
 
 /**
@@ -10,14 +13,16 @@ public class User {
 
     private Integer id;
 
+    @NotBlank(message = "Name should not be blank")
     private String name;
 
-    private LocalDate date;
+    @PastOrPresent(message = "Birth Date cannot be future date")
+    private LocalDate birthDate;
 
-    public User(Integer id, String name, LocalDate date) {
+    public User(Integer id, String name, LocalDate birthDate) {
         this.id = id;
         this.name = name;
-        this.date = date;
+        this.birthDate = birthDate;
     }
 
     public Integer getId() {
@@ -36,12 +41,12 @@ public class User {
         this.name = name;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public LocalDate getBirthDate() {
+        return birthDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 
     @Override
@@ -49,7 +54,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", date=" + date +
+                ", date=" + birthDate +
                 '}';
     }
 }
