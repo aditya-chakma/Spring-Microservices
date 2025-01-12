@@ -15,7 +15,7 @@ import java.util.List;
  * @since 09 Jan, 2025 10:50 AM
  */
 @RestController
-@RequestMapping("/product")
+@RequestMapping("/v1/product")
 public class ProductControllerV1 {
 
     private ProductServiceV1 productServiceV1;
