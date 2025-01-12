@@ -6,6 +6,8 @@ import com.iaxis.Spring.microsevices.user.helper.UserHelper;
 import com.iaxis.Spring.microsevices.user.service.UserDaoService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 /**
  * @author aditya.chakma
@@ -64,6 +68,31 @@ public class UserController {
                 .toUri();
 
         return ResponseEntity.created(location).build();
+    }
+
+    @PostMapping("/v2")
+    public ResponseEntity<?> createUserV2(@Valid @RequestBody User user,
+                                          BindingResult result) {
+
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body(userHelper.getErrorDetails(result));
+        }
+
+        user = userDaoService.saveUser(user);
+
+        EntityModel<User> entityModel = EntityModel.of(user);
+        WebMvcLinkBuilder linkBuilder = WebMvcLinkBuilder.linkTo(methodOn(this.getClass()).getList());
+        entityModel.add(linkBuilder.withRel("all-users"));
+
+        WebMvcLinkBuilder deleteLinkBuilder = WebMvcLinkBuilder.linkTo(methodOn(this.getClass()).deleteUser(user.getId()));
+        entityModel.add(deleteLinkBuilder.withRel("delete-user").withType("Delete"));
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(user.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(entityModel);
     }
 
     @DeleteMapping("/{id}")
