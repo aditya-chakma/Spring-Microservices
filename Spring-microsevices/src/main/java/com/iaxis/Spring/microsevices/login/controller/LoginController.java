@@ -3,10 +3,11 @@ package com.iaxis.Spring.microsevices.login.controller;
 import com.iaxis.Spring.microsevices.login.entity.Login;
 import com.iaxis.Spring.microsevices.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ import java.util.List;
 @RequestMapping("/login")
 public class LoginController {
 
-    private LoginService loginService;
+    private final LoginService loginService;
 
     @Autowired
     public LoginController(LoginService loginService) {
@@ -30,8 +31,19 @@ public class LoginController {
     }
 
     @GetMapping("/{id}")
-    public Login getLogin(Long id) {
+    public Login getLogin(@PathVariable Long id) {
         return loginService.find(id);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> saveLogin(@RequestBody Login login) {
+        login = loginService.saveOrUpdate(login);
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}")
+                .build(login.getId());
+
+        return ResponseEntity.created(location).build();
     }
 
 }

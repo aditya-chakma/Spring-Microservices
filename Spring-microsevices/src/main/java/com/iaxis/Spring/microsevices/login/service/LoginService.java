@@ -14,7 +14,7 @@ import java.util.List;
 @Service
 public class LoginService {
 
-    private LoginRepository loginRepository;
+    private final LoginRepository loginRepository;
 
     @Autowired
     public LoginService(LoginRepository loginRepository) {
@@ -27,6 +27,10 @@ public class LoginService {
 
     public Login find(Long id) {
         return loginRepository.findById(id).orElse(null);
+    }
+
+    public Login saveOrUpdate(Login login) {
+        return loginRepository.save(login);
     }
 
 }
