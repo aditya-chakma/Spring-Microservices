@@ -1,7 +1,5 @@
 package com.iAxis.currency_exchange_service.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.iAxis.currency_exchange_service.enums.Currency;
 import jakarta.persistence.*;
 
