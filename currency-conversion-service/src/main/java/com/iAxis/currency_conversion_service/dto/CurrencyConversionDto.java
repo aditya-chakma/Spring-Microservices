@@ -1,6 +1,7 @@
 package com.iAxis.currency_conversion_service.dto;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * @author aditya.chakma
@@ -16,7 +17,14 @@ public class CurrencyConversionDto {
 
     private double quantity;
 
+    private double conversionMultiple;
+
     private BigDecimal convertedAmount;
+
+    private String environment;
+
+    public CurrencyConversionDto() {
+    }
 
     public CurrencyConversionDto(int id, String from, String to, double quantity) {
         this.id = id;
@@ -57,6 +65,14 @@ public class CurrencyConversionDto {
         this.quantity = quantity;
     }
 
+    public double getConversionMultiple() {
+        return conversionMultiple;
+    }
+
+    public void setConversionMultiple(double conversionMultiple) {
+        this.conversionMultiple = conversionMultiple;
+    }
+
     public BigDecimal getConvertedAmount() {
         return convertedAmount;
     }
@@ -65,4 +81,16 @@ public class CurrencyConversionDto {
         this.convertedAmount = convertedAmount;
     }
 
+    public void calculateConvertedAmount() {
+        convertedAmount = BigDecimal.valueOf(quantity * conversionMultiple);
+        convertedAmount = convertedAmount.setScale(2, RoundingMode.HALF_UP);
+    }
+
+    public String getEnvironment() {
+        return environment;
+    }
+
+    public void setEnvironment(String environment) {
+        this.environment = environment;
+    }
 }
