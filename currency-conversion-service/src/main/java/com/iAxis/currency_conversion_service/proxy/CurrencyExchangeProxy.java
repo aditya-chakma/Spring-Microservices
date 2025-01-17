@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
  * @author aditya.chakma
  * @since 16 Jan, 2025 4:17 PM
  */
-@FeignClient(value = "currency-exchange", url = "http://localhost:8000/currency-exchange/")
+@FeignClient(value = "currency-exchange", path = "/currency-exchange")
 public interface CurrencyExchangeProxy {
 
     @GetMapping("/rate/{from}/{to}")
