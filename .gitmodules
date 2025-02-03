@@ -1,0 +1,3 @@
+[submodule "git-configs"]
+	path = git-configs
+	url = git@github.com:aditya-chakma/demo-config-repo.git
