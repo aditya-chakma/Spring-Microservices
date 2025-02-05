@@ -12,8 +12,10 @@ Components of Spring cloud.
 
 ### Config Server
 
-- Config Server
-- Config Client
+Spring cloud config server and client enables microservices to manage their configuration in a centralized manner. This is achieved through a config server that stores the configuration in a Git repository. The config server exposes a REST API that allows clients to retrieve their configuration. The client can then use the retrieved configuration to initialize its application context. Please watch the following repos for demo:
+
+- Config Serve. [Spring cloud config server](./spring-cloud-config-server/README.md)
+- Config Client [Limits service](./limits-service/README.md)
 
 ### Netflix Eureka (Discovery Server)
 
