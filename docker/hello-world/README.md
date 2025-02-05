@@ -1,4 +1,4 @@
-# Docker
+# <img src="./icons/docker.png" style="width:1em"/> Docker
 
 Getting started with docker. First download and install docker from [here](https://docs.docker.com/engine/install/ubuntu/). After the download is finished launch docke desktop from system apps.
 
@@ -104,3 +104,5 @@ One thing to notice here is we broke down the mvn packaging into two separate la
 On the second layer, we have copied everything from our host machine to the docker image and made the actual build. But notice, since, in the first layers, the pom.xml is cached, even if the code changed during the second layer, it will make use of the pom.xml from the previous layer. Means, the second build will always use previous layers cached downloaded dependencies.
 
 Now, in the final layer, we are running the application as previously stated.
+
+***There is another alternative to make docker image. We can build docker image using maven. The images maven builds are more optimized than our builds. Just run the following maven command and maven will do the rest: `mvn spring-boot:build-image`*** 😄
