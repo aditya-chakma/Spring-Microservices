@@ -29,3 +29,12 @@ Components of Spring cloud.
 - Rate Limiter
 - Retry
 - Ciruit Breaker
+
+### Docker
+
+The demo docker repo can be found [here](./docker/hello-world/)
+
+- Install Docker
+- Launch app in a docker container
+- Create a docker image
+- Optimize docker script
