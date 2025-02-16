@@ -40,3 +40,9 @@ The demo docker repo can be found [here](./docker/hello-world/)
 - Launch app in a docker container
 - Create a docker image
 - Optimize docker script
+
+## Distributed Tracing
+
+- Micrometer (Logs, Metrices & Traces)
+- OpenTelemetry
+- Zipkin

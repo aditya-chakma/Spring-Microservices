@@ -30,7 +30,7 @@ and we are using java 21 and spring cloud version 2024.
 
 Now we need to read configuration from a repository. This can be a remote repository. For this let's create a repository containing all the configurations. First create a folder
 
-```sh
+```bash
 mkdir git-config
 cd git-config
 git init
