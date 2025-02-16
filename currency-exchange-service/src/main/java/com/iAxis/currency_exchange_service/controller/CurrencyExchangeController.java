@@ -4,6 +4,8 @@ import com.iAxis.currency_exchange_service.dto.CurrencyExchange;
 import com.iAxis.currency_exchange_service.entity.CurrencyRate;
 import com.iAxis.currency_exchange_service.enums.Currency;
 import com.iAxis.currency_exchange_service.service.CurrencyRateService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class CurrencyExchangeController {
 
+    private Logger logger = LoggerFactory.getLogger(CurrencyExchangeController.class);
+
     private final Environment environment;
 
     private final CurrencyRateService currencyRateService;
@@ -29,6 +33,9 @@ public class CurrencyExchangeController {
 
     @GetMapping("/rate/{from}/{to}")
     public CurrencyExchange getCurrencyExchange(@PathVariable Currency from, @PathVariable Currency to) {
+
+        logger.info("Get currency exchange from {} to {}", from, to);
+
         CurrencyRate fromCurrencyRate = currencyRateService.getCurrencyRate(from);
         CurrencyRate toCurrencyRate = currencyRateService.getCurrencyRate(to);
 
